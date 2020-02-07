@@ -15,7 +15,7 @@ class _SplashPageState extends State<SplashPage> {
     // TODO: implement initState
     super.initState();
     Future.delayed(Duration(seconds: 2)).then((_) {
-      Modular.to.pushReplacementNamed('/home');
+      Modular.to.pushReplacementNamed('/login');
     });
   }
 

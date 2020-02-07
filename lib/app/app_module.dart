@@ -1,3 +1,4 @@
+import 'package:flutterwolrd_br/app/modules/login/login_controller.dart';
 import 'package:flutterwolrd_br/app/modules/login/login_module.dart';
 import 'package:flutterwolrd_br/app/pages/splash/splash_controller.dart';
 import 'package:flutterwolrd_br/app/app_controller.dart';
