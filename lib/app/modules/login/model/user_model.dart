@@ -3,7 +3,7 @@ class UserModel {
   String email;
   String password;
   String passwordConfirm;
-  String actived;
+  bool actived;
 
   UserModel({
     this.name,

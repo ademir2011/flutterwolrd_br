@@ -7,8 +7,7 @@ part 'login_controller.g.dart';
 class LoginController = _LoginBase with _$LoginController;
 
 abstract class _LoginBase with Store {
-  // @observable
-  // UserModel userModel;
+  UserModel userModel;
 
   @observable
   String email = '';
@@ -16,16 +15,28 @@ abstract class _LoginBase with Store {
   @observable
   String password = '';
 
-  // _LoginBase() {
-  //   userModel.email = '';
-  //   userModel.password = '';
-  // }
+  _LoginBase() {
+    userModel = UserModel(
+      email: '',
+      password: '',
+      actived: true,
+      name: '',
+      passwordConfirm: '',
+    );
+  }
 
   @action
-  void setEmail(value) => email = value;
+  void setEmail(value) {
+    userModel.email = value;
+    email = value;
+  }
 
   @action
-  void setPassword(value) => password = value;
+  void setPassword(value) {
+    userModel.password = value;
+    password = value;
+  }
 
   String validateEmail() => email.isEmpty ? 'Vazio' : null;
+  String validatePassword() => password.isEmpty ? 'Vazio' : null;
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutterwolrd_br/app/modules/login/components/text_field_form.dart';
 import 'package:flutterwolrd_br/app/modules/login/login_controller.dart';
 
 class LoginPage extends StatefulWidget {
@@ -15,7 +16,6 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
   final LoginController loginController = Modular.get();
-  // final LoginController loginController = LoginController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,25 +29,25 @@ class _LoginPageState extends State<LoginPage> {
               children: <Widget>[
                 Observer(
                   builder: (_) {
-                    return _textFieldForm(
+                    return Text_Field_Form.textFieldForm(
                       labelText: 'Login',
                       onChanged: loginController.setEmail,
                       validateString: loginController.validateEmail,
                     );
                   },
                 ),
-                // Observer(
-                //   builder: (_) {
-                //     return _textFieldForm(
-                //       labelText: 'Senha',
-                //       // onChanged: loginController.setPassword,
-                //       // validateString: loginController.userModel,
-                //     );
-                //   },
-                // ),
                 Observer(
                   builder: (_) {
-                    return Text(loginController.email);
+                    return Text_Field_Form.textFieldForm(
+                      labelText: 'Senha',
+                      onChanged: loginController.setPassword,
+                      validateString: loginController.validatePassword,
+                    );
+                  },
+                ),
+                Observer(
+                  builder: (_) {
+                    return Text(loginController.userModel.email);
                     // loginController.userModel ? 'validados' : 'não validado',
                   },
                 ),
@@ -58,14 +58,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
-  Widget _textFieldForm(
-          {String labelText, onChanged, String Function() validateString}) =>
-      TextFormField(
-        onChanged: onChanged,
-        decoration: InputDecoration(
-          labelText: labelText,
-          errorText: validateString(),
-        ),
-      );
 }
