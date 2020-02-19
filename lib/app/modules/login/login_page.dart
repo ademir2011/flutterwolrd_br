@@ -34,8 +34,8 @@ class _LoginPageState extends State<LoginPage> {
                 children: <Widget>[
                   Observer(
                     builder: (_) {
-                      return Text_Field_Form.textFieldForm(
-                        labelText: 'Login',
+                      return TFF.textFieldForm(
+                        labelText: 'E-mail',
                         onChanged: loginController.setEmail,
                         validateString: loginController.validateEmail,
                       );
@@ -43,10 +43,11 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Observer(
                     builder: (_) {
-                      return Text_Field_Form.textFieldForm(
+                      return TFF.textFieldForm(
                         labelText: 'Senha',
                         onChanged: loginController.setPassword,
                         validateString: loginController.validatePassword,
+                        obscureText: true,
                       );
                     },
                   ),
@@ -59,10 +60,10 @@ class _LoginPageState extends State<LoginPage> {
                       Text('Salvar dados ?'),
                     ],
                   ),
-                  Observer(
-                    builder: (_) {
-                      return Text(loginController.userModel.email);
-                      // loginController.userModel ? 'validados' : 'não validado',
+                  RaisedButton(
+                    child: Text('criar conta'),
+                    onPressed: () {
+                      Modular.to.pushNamed('/signup');
                     },
                   ),
                   RaisedButton(

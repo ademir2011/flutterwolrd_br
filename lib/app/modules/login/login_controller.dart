@@ -15,6 +15,9 @@ abstract class _LoginBase with Store {
   @observable
   String password = '';
 
+  // @computed
+  // bool validated =
+
   _LoginBase() {
     userModel = UserModel(
       email: '',
@@ -37,6 +40,16 @@ abstract class _LoginBase with Store {
     password = value;
   }
 
-  String validateEmail() => email.isEmpty ? 'Vazio' : null;
-  String validatePassword() => password.isEmpty ? 'Vazio' : null;
+  String validateEmail() {
+    if (email.isEmpty) return 'Vazio';
+
+    if (!RegExp('[^@]+@[^\.]+\..+').hasMatch(email)) return 'E-mail incorreto';
+
+    return null;
+  }
+
+  String validatePassword() {
+    if (password.isEmpty) return 'Vazio';
+    return null;
+  }
 }

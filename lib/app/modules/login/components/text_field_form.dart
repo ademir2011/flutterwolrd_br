@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 // import 'package:flutterwolrd_br/app/utils/generate_profile.dart';
 
-class Text_Field_Form {
+class TFF {
   static Widget textFieldForm(
-          {String labelText, onChanged, String Function() validateString}) =>
+          {@required String labelText,
+          @required onChanged,
+          @required String Function() validateString,
+          bool obscureText = false}) =>
       TextFormField(
         // initialValue: labelText == 'login'
         //     ? GenerateProfile.login()
@@ -13,5 +16,7 @@ class Text_Field_Form {
           labelText: labelText,
           errorText: validateString(),
         ),
+        obscureText: obscureText,
+        maxLength: 100,
       );
 }

@@ -38,4 +38,4 @@ flutter:
         - asset: assets/fonts/Roboto-Medium.ttf
 
 scripts:
-  mobx: flutter pub run build_runner watch --delete-conflicting-outputs
+  mobx: flutter pub run build_runner watch --use-polling-watcher
