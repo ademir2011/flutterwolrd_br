@@ -6,8 +6,38 @@ class SignupController = _SignupBase with _$SignupController;
 
 abstract class _SignupBase with Store {
   @observable
-  int value = 0;
+  String email = '';
+
+  @observable
+  String password = '';
+
+  @observable
+  String confirmPassword = '';
 
   @action
-  void increment() {}
+  void setEmail(email) => this.email = email;
+
+  @action
+  void setPassword(password) => this.password = password;
+
+  @action
+  void setConfirmPassword(confirmPassword) =>
+      this.confirmPassword = confirmPassword;
+
+  @computed
+  bool get isButtonDisabled =>
+      validateEmail() == null && validatePassword() == null;
+
+  String validateEmail() {
+    if (email.isEmpty) return 'Vazio';
+
+    if (!RegExp('[^@]+@[^\.]+\..+').hasMatch(email)) return 'E-mail incorreto';
+
+    return null;
+  }
+
+  String validatePassword() {
+    if (password.isEmpty) return 'Vazio';
+    return null;
+  }
 }

@@ -15,7 +15,6 @@ class AppModule extends MainModule {
         Bind((i) => SplashController()),
         Bind((i) => Components()),
         Bind((i) => AppController()),
-        Bind((i) => SignupController())
       ];
 
   @override
