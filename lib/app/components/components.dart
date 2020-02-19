@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Components {
-  BoxDecoration backgroundDecoration() {
+  static BoxDecoration backgroundDecoration() {
     return BoxDecoration(
       gradient: LinearGradient(
         begin: Alignment.topCenter,

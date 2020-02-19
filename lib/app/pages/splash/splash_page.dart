@@ -13,7 +13,6 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   final SplashController splashController = Modular.get();
-  final Components components = Modular.get();
   @override
   void initState() {
     // TODO: implement initState
@@ -25,7 +24,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: components.backgroundDecoration(),
+        decoration: Components.backgroundDecoration(),
         child: Center(
           child: Text(
             'Flutter Wolrd',
