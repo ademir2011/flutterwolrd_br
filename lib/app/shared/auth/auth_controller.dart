@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutterwolrd_br/app/modules/login/model/user_model.dart';
 import 'package:flutterwolrd_br/app/shared/auth/repositories/auth_repository.dart';
 import 'package:mobx/mobx.dart';
 
@@ -34,6 +35,11 @@ abstract class _AuthControllerBase with Store {
 
   Future logout() async {
     await _authRepository.googleLogout();
+  }
+
+  @action
+  Future createAccount(UserModel usermodel) async {
+    user = await _authRepository.createAccount(usermodel);
   }
 }
 

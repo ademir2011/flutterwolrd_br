@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutterwolrd_br/app/modules/login/model/user_model.dart';
 import 'package:flutterwolrd_br/app/shared/auth/repositories/auth_repository_interface.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -30,4 +31,12 @@ class AuthRepository extends AuthRepositoryInterface {
 
   @override
   Future<FirebaseUser> getUser() => _auth.currentUser();
+
+  @override
+  Future<FirebaseUser> createAccount(UserModel userModel) async =>
+      (await _auth.createUserWithEmailAndPassword(
+        email: userModel.email,
+        password: userModel.password,
+      ))
+          .user;
 }

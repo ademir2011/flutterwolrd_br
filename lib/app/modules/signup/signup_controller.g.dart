@@ -67,6 +67,23 @@ mixin _$SignupController on _SignupBase, Store {
     }, _$confirmPasswordAtom, name: '${_$confirmPasswordAtom.name}_set');
   }
 
+  final _$accountCreatedAtom = Atom(name: '_SignupBase.accountCreated');
+
+  @override
+  SignUpStatus get accountCreated {
+    _$accountCreatedAtom.context.enforceReadPolicy(_$accountCreatedAtom);
+    _$accountCreatedAtom.reportObserved();
+    return super.accountCreated;
+  }
+
+  @override
+  set accountCreated(SignUpStatus value) {
+    _$accountCreatedAtom.context.conditionallyRunInAction(() {
+      super.accountCreated = value;
+      _$accountCreatedAtom.reportChanged();
+    }, _$accountCreatedAtom, name: '${_$accountCreatedAtom.name}_set');
+  }
+
   final _$_SignupBaseActionController = ActionController(name: '_SignupBase');
 
   @override
@@ -94,6 +111,16 @@ mixin _$SignupController on _SignupBase, Store {
     final _$actionInfo = _$_SignupBaseActionController.startAction();
     try {
       return super.setConfirmPassword(confirmPassword);
+    } finally {
+      _$_SignupBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void cadastrar() {
+    final _$actionInfo = _$_SignupBaseActionController.startAction();
+    try {
+      return super.cadastrar();
     } finally {
       _$_SignupBaseActionController.endAction(_$actionInfo);
     }

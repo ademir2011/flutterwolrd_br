@@ -50,6 +50,13 @@ mixin _$AuthController on _AuthControllerBase, Store {
     return _$loginWithGoogleAsyncAction.run(() => super.loginWithGoogle());
   }
 
+  final _$createAccountAsyncAction = AsyncAction('createAccount');
+
+  @override
+  Future<dynamic> createAccount(UserModel usermodel) {
+    return _$createAccountAsyncAction.run(() => super.createAccount(usermodel));
+  }
+
   final _$_AuthControllerBaseActionController =
       ActionController(name: '_AuthControllerBase');
 
