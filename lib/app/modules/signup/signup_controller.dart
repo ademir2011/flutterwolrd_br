@@ -22,11 +22,12 @@ abstract class _SignupBase with Store {
 
   @action
   void setConfirmPassword(confirmPassword) =>
-      this.confirmPassword = confirmPassword;
+      (this.confirmPassword = confirmPassword);
 
   @computed
-  bool get isButtonDisabled =>
-      validateEmail() == null && validatePassword() == null;
+  bool get isButtonDisabled {
+    return validateEmail() == null && validatePassword() == null;
+  }
 
   String validateEmail() {
     if (email.isEmpty) return 'Vazio';
@@ -40,4 +41,6 @@ abstract class _SignupBase with Store {
     if (password.isEmpty) return 'Vazio';
     return null;
   }
+
+  void cadastrar() {}
 }

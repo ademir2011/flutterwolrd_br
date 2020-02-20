@@ -58,7 +58,7 @@ class _SignupPageState extends State<SignupPage> {
               builder: (_) {
                 return RaisedButton(
                   onPressed: signupController.isButtonDisabled
-                      ? signupController.cadastrar()
+                      ? signupController.cadastrar
                       : null,
                   child: Text(!signupController.isButtonDisabled
                       ? 'Cadastrar'

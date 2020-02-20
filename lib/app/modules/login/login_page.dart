@@ -5,6 +5,7 @@ import 'package:flutterwolrd_br/app/components/components.dart';
 import 'package:flutterwolrd_br/app/modules/login/components/google_button.dart';
 import 'package:flutterwolrd_br/app/modules/login/components/text_field_form.dart';
 import 'package:flutterwolrd_br/app/modules/login/login_controller.dart';
+import 'package:flutterwolrd_br/app/shared/auth/auth_controller.dart';
 
 class LoginPage extends StatefulWidget {
   final String title;
@@ -18,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
   final LoginController loginController = Modular.get();
+  final AuthController authController = Modular.get();
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {},
                     child: Text('Esqueceu sua senha ? Clique aqui'),
                   ),
-                  GB.googleButton(() {}),
+                  GB.googleButton(authController.loginWithGoogle),
                 ],
               ),
             ),

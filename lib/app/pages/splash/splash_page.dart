@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutterwolrd_br/app/components/components.dart';
 import 'package:flutterwolrd_br/app/pages/splash/splash_controller.dart';
+import 'package:flutterwolrd_br/app/shared/auth/auth_controller.dart';
+import 'package:mobx/mobx.dart';
 
 class SplashPage extends StatefulWidget {
   final String title;
@@ -13,11 +15,12 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   final SplashController splashController = Modular.get();
+
+  ReactionDisposer disposer;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    splashController.passToScreen(seconds: 2, page: '/login');
+    disposer = autorun((_) => splashController.passToScreen(seconds: 2));
   }
 
   @override
@@ -36,5 +39,12 @@ class _SplashPageState extends State<SplashPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    disposer();
   }
 }
