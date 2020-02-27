@@ -6,11 +6,10 @@ class TFF {
           {@required String labelText,
           @required onChanged,
           @required String Function() validateString,
-          bool obscureText = false}) =>
+          bool obscureText = false,
+          String initialValue}) =>
       TextFormField(
-        // initialValue: labelText == 'login'
-        //     ? GenerateProfile.login()
-        //     : GenerateProfile.password(),
+        initialValue: initialValue ??= null,
         onChanged: onChanged,
         decoration: InputDecoration(
           labelText: labelText,

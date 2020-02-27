@@ -1,6 +1,6 @@
-import 'package:flutterwolrd_br/app/modules/feed/feed/feed_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutterwolrd_br/app/modules/feed/feed/feed_page.dart';
+import 'package:flutterwolrd_br/app/modules/feed/feed_controller.dart';
+import 'package:flutterwolrd_br/app/modules/feed/feed_page.dart';
 import 'package:flutterwolrd_br/app/shared/auth/auth_controller.dart';
 
 class FeedModule extends ChildModule {

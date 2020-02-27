@@ -5,6 +5,7 @@ import 'package:flutterwolrd_br/app/components/components.dart';
 import 'package:flutterwolrd_br/app/modules/login/components/text_field_form.dart';
 import 'package:flutterwolrd_br/app/modules/signup/signup_controller.dart';
 import 'package:flutterwolrd_br/app/shared/auth/auth_controller.dart';
+import 'package:gen_profile/gen_profile.dart';
 
 class SignupPage extends StatefulWidget {
   final String title;
@@ -32,19 +33,19 @@ class _SignupPageState extends State<SignupPage> {
               Observer(
                 builder: (_) {
                   return TFF.textFieldForm(
-                    labelText: 'E-mail',
-                    onChanged: signupController.setEmail,
-                    validateString: signupController.validateEmail,
-                  );
+                      labelText: 'E-mail',
+                      onChanged: signupController.setEmail,
+                      validateString: signupController.validateEmail,
+                      initialValue: signupController.email);
                 },
               ),
               Observer(
                 builder: (_) {
                   return TFF.textFieldForm(
-                    labelText: 'Senha',
-                    onChanged: signupController.setPassword,
-                    validateString: signupController.validatePassword,
-                  );
+                      labelText: 'Senha',
+                      onChanged: signupController.setPassword,
+                      validateString: signupController.validatePassword,
+                      initialValue: signupController.password);
                 },
               ),
               Observer(
@@ -59,7 +60,7 @@ class _SignupPageState extends State<SignupPage> {
               Observer(
                 builder: (_) {
                   return RaisedButton(
-                    onPressed: signupController.isButtonDisabled
+                    onPressed: !signupController.isButtonDisabled
                         ? signupController.cadastrar
                         : null,
                     child: Text(!signupController.isButtonDisabled

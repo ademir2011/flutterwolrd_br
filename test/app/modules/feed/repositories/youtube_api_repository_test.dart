@@ -2,22 +2,22 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:dio/dio.dart';
 
-import 'package:flutterwolrd_br/app/shared/auth/repositories/auth_repository.dart';
+import 'package:flutterwolrd_br/app/modules/feed/repositories/youtube_api_repository.dart';
 
 class MockClient extends Mock implements Dio {}
 
 void main() {
-  AuthRepository repository;
+  YoutubeApiRepository repository;
   MockClient client;
 
   setUp(() {
-    repository = AuthRepository();
+    repository = YoutubeApiRepository();
     client = MockClient();
   });
 
-  group('AuthRepository Test', () {
+  group('YoutubeApiRepository Test', () {
     test("First Test", () {
-      expect(repository, isInstanceOf<AuthRepository>());
+      expect(repository, isInstanceOf<YoutubeApiRepository>());
     });
 
     test('returns a Post if the http call completes successfully', () async {

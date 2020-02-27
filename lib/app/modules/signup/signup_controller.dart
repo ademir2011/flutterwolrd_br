@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutterwolrd_br/app/modules/login/model/user_model.dart';
 import 'package:flutterwolrd_br/app/shared/auth/auth_controller.dart';
+import 'package:gen_profile/gen_profile.dart';
 import 'package:mobx/mobx.dart';
 
 part 'signup_controller.g.dart';
@@ -11,16 +12,21 @@ abstract class _SignupBase with Store {
   var authController = Modular.get<AuthController>();
 
   @observable
-  String email = '';
+  String email = GP.email();
 
   @observable
-  String password = '';
+  String password = GP.password();
 
   @observable
   String confirmPassword = '';
 
   @observable
   SignUpStatus accountCreated = SignUpStatus.notCreated;
+
+  @computed
+  bool get isButtonDisabled {
+    return validateEmail() != null || validatePassword() != null;
+  }
 
   @action
   void setEmail(email) => this.email = email;
@@ -31,11 +37,6 @@ abstract class _SignupBase with Store {
   @action
   void setConfirmPassword(confirmPassword) =>
       (this.confirmPassword = confirmPassword);
-
-  @computed
-  bool get isButtonDisabled {
-    return validateEmail() == null && validatePassword() == null;
-  }
 
   String validateEmail() {
     if (email.isEmpty) return 'Vazio';
