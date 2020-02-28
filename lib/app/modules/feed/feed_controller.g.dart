@@ -9,31 +9,31 @@ part of 'feed_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$FeedController on _FeedControllerBase, Store {
-  final _$valueAtom = Atom(name: '_FeedControllerBase.value');
+  final _$yt_controllersAtom = Atom(name: '_FeedControllerBase.yt_controllers');
 
   @override
-  int get value {
-    _$valueAtom.context.enforceReadPolicy(_$valueAtom);
-    _$valueAtom.reportObserved();
-    return super.value;
+  ObservableList<YoutubePlayerController> get yt_controllers {
+    _$yt_controllersAtom.context.enforceReadPolicy(_$yt_controllersAtom);
+    _$yt_controllersAtom.reportObserved();
+    return super.yt_controllers;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.context.conditionallyRunInAction(() {
-      super.value = value;
-      _$valueAtom.reportChanged();
-    }, _$valueAtom, name: '${_$valueAtom.name}_set');
+  set yt_controllers(ObservableList<YoutubePlayerController> value) {
+    _$yt_controllersAtom.context.conditionallyRunInAction(() {
+      super.yt_controllers = value;
+      _$yt_controllersAtom.reportChanged();
+    }, _$yt_controllersAtom, name: '${_$yt_controllersAtom.name}_set');
   }
 
   final _$_FeedControllerBaseActionController =
       ActionController(name: '_FeedControllerBase');
 
   @override
-  void increment() {
+  void addYoutubePlayerController({String initialVideoId}) {
     final _$actionInfo = _$_FeedControllerBaseActionController.startAction();
     try {
-      return super.increment();
+      return super.addYoutubePlayerController(initialVideoId: initialVideoId);
     } finally {
       _$_FeedControllerBaseActionController.endAction(_$actionInfo);
     }
