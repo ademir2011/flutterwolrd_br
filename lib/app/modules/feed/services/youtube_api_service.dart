@@ -7,7 +7,7 @@ class YoutubeApiService {
 
   final Dio dio = Dio();
 
-  Future<String> getAllFlutterVideos() async {
+  Future<dynamic> getAllFlutterVideos() async {
     return await youtubeApiRepository.getAllVideosByName(dio);
   }
 }

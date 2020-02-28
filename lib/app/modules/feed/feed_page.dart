@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutterwolrd_br/app/modules/feed/services/youtube_api_service.dart';
 import 'package:flutterwolrd_br/app/shared/auth/auth_controller.dart';
 import 'package:video_player/video_player.dart';
 import 'feed_controller.dart';
@@ -14,18 +15,12 @@ class FeedPage extends StatefulWidget {
 
 class _FeedPageState extends ModularState<FeedPage, FeedController> {
   final AuthController authController = Modular.get();
-  VideoPlayerController _controller;
-  Future<void> _initializeVideoPlayerFuture;
+  List<VideoPlayerController> _controller = List<VideoPlayerController>();
+  // Future<void> _initializeVideoPlayerFuture;
+  YoutubeApiService youtubeApiService = YoutubeApiService();
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-    _controller = VideoPlayerController.network(
-      'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-    );
-    _initializeVideoPlayerFuture = _controller.initialize();
+  Future<dynamic> updateAllVideos() async {
+    return await youtubeApiService.getAllFlutterVideos();
   }
 
   @override
@@ -46,28 +41,46 @@ class _FeedPageState extends ModularState<FeedPage, FeedController> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             padding: EdgeInsets.all(10.0),
-            child: ListView.builder(
-              itemCount: 3,
-              itemBuilder: (c, i) {
-                return Card(
-                  child: Container(
-                    padding: EdgeInsets.all(10.0),
-                    child: FutureBuilder(
-                      future: _initializeVideoPlayerFuture,
-                      builder: (c, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          _controller.play();
-                          return AspectRatio(
-                            aspectRatio: _controller.value.aspectRatio,
-                            child: VideoPlayer(_controller),
-                          );
-                        } else {
-                          return Center(child: CircularProgressIndicator());
-                        }
-                      },
-                    ),
-                  ),
-                );
+            child: FutureBuilder(
+              future: updateAllVideos(),
+              builder: (c, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return ListView.builder(
+                    itemCount: snapshot.data['items'].length,
+                    itemBuilder: (c, i) {
+                      _controller.add(
+                        VideoPlayerController.network(
+                          'https://www.youtube.com/watch?v=' +
+                              snapshot.data['items'][i]['id']['videoId'],
+                        ),
+                      );
+
+                      return Card(
+                        child: Container(
+                          padding: EdgeInsets.all(10.0),
+                          child: FutureBuilder(
+                            future: _controller[i].initialize(),
+                            builder: (c, s) {
+                              if (s.connectionState == ConnectionState.done) {
+                                print('>>>>>>>>>' + s.hasData.toString());
+                                return AspectRatio(
+                                  aspectRatio: _controller[i].value.aspectRatio,
+                                  child: VideoPlayer(_controller[i]),
+                                );
+                              } else {
+                                return Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                } else {
+                  return Center(child: CircularProgressIndicator());
+                }
               },
             ),
           ),
